@@ -133,14 +133,14 @@
                 app:srcCompat="@drawable/ic_google"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floating_action_button"
+                android:id="@+id/fbLogin"
                 style="@style/Widget.Design.FloatingActionButton"
-                app:fabSize="mini"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:backgroundTint="@color/colorPrimary"
                 android:layout_margin="5dp"
-                app:srcCompat="@drawable/ic_facebook"/>
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_facebook" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 style="@style/Widget.Design.FloatingActionButton"
