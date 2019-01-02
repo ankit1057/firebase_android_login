@@ -22,6 +22,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/pbProcessing"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+
+
+        android:progressBackgroundTint="@color/textSecondary"
+        android:indeterminateTint="@color/textPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/lineView"
+        app:layout_constraintTop_toTopOf="@+id/lineView"
+        android:indeterminate="true"
+        android:indeterminateOnly="true"/>
+
     <View
         android:id="@+id/lineView"
         android:layout_width="40dp"
@@ -82,7 +98,7 @@
             android:textColor="@color/colorAccent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/material_button"
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -143,13 +159,14 @@
                 app:srcCompat="@drawable/ic_facebook" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/tweeterLogin"
                 style="@style/Widget.Design.FloatingActionButton"
-                app:fabSize="mini"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:backgroundTint="@color/colorPrimary"
                 android:layout_margin="5dp"
-                app:srcCompat="@drawable/ic_twitter"/>
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_twitter" />
 
 
         </LinearLayout>

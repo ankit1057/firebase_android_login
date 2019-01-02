@@ -1,7 +1,9 @@
-<resources>
+<resources xmlns:android="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">FirebaseLogin</string>
     <string name="facebook_app_id">321363465143359</string>
     <string name="fb_login_protocol_scheme">fb321363465143359</string>
 
+    <string name="CONSUMER_KEY">C7lF6EksYQT1OIhgKiiYyK7ZJ</string>
+    <string name="CONSUMER_SECRET">aOBC5PixTLrfhV4LaR5IbEtYTCW4EPTwscUg419QZFFJkrstjM</string>
 </resources>
