@@ -91,6 +91,7 @@
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -188,6 +189,7 @@
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/signupNavigation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

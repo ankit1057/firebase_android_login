@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,6 +17,7 @@ public class DashboardActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView mDisplayName;
     private Button mLogout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,14 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void decideAction(FirebaseUser currentUser){
         if(currentUser!=null){
-            mDisplayName.setText(currentUser.getDisplayName());
+            if(currentUser.getDisplayName() != null){
+                mDisplayName.setText(currentUser.getDisplayName());
+            }
+            else {
+                mDisplayName.setText(currentUser.getEmail());
+            }
+
+
         }
         else {
             startActivity(new Intent(DashboardActivity.this, MainActivity.class));

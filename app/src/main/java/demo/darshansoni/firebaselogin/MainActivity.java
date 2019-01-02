@@ -23,7 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -57,42 +57,29 @@ public class MainActivity extends AppCompatActivity {
     private TwitterAuthClient mTwitterAuthClient;
     private View lineView;
     private ProgressBar progressBar;
-    private MaterialButton mLogin;
+    private MaterialButton mLogin, mSignupNavigation, mForgotPassword;
+    private TextInputEditText mEmail, mPassword;
+    private String email, password, error="Required";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lineView = findViewById(R.id.lineView);
-        progressBar = findViewById(R.id.pbProcessing);
-        mLogin = findViewById(R.id.login_button);
+        mAuth = FirebaseAuth.getInstance();
+        initUi();
+        initTwitter();
+        setUpClickListener();
 
+    }
+
+    private void setUpClickListener() {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lineView.getVisibility() == View.VISIBLE){
-                    lineView.setVisibility(View.INVISIBLE);
-                    progressBar.setVisibility(View.VISIBLE);
-                }
-                else {
-                    lineView.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-
+                loginUser();
             }
         });
-        TwitterConfig config = new TwitterConfig.Builder(this)
-                .logger(new DefaultLogger(Log.DEBUG))
-                .twitterAuthConfig(new TwitterAuthConfig(getString(R.string.CONSUMER_KEY), getString(R.string.CONSUMER_SECRET)))
-                .debug(true)
-                .build();
-       Twitter.initialize(config);
-
-        mAuth = FirebaseAuth.getInstance();
-        mGoogle = findViewById(R.id.googleLogin);
-        mFb = findViewById(R.id.fbLogin);
-        mTweeter = findViewById(R.id.tweeterLogin);
 
         mGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +110,74 @@ public class MainActivity extends AppCompatActivity {
                 tweeterLogin();
             }
         });
+
+        mSignupNavigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SignupActivity.class));
+            }
+        });
+
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void loginUser() {
+        email = mEmail.getText().toString();
+        password = mPassword.getText().toString();
+
+        if(email.equals("")){
+            mEmail.setError(error);
+        }
+        else if(password.equals("")){
+            mPassword.setError(error);
+        }
+        else {
+            decideProgressVisibility(true);
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            decideProgressVisibility(false);
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                startDashboardActivity();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(MainActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void initTwitter() {
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig(getString(R.string.CONSUMER_KEY), getString(R.string.CONSUMER_SECRET)))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+
+    }
+
+    private void initUi() {
+        lineView = findViewById(R.id.lineView);
+        progressBar = findViewById(R.id.pbProcessing);
+        mLogin = findViewById(R.id.login_button);
+        mSignupNavigation = findViewById(R.id.signupNavigation);
+        mGoogle = findViewById(R.id.googleLogin);
+        mFb = findViewById(R.id.fbLogin);
+        mTweeter = findViewById(R.id.tweeterLogin);
+        mEmail = findViewById(R.id.emailText);
+        mPassword = findViewById(R.id.passwordText);
+        mForgotPassword = findViewById(R.id.forgot_password);
     }
 
     /* methods for handling login with google */
@@ -295,6 +350,17 @@ public class MainActivity extends AppCompatActivity {
     private void startDashboardActivity(){
         startActivity(new Intent(MainActivity.this,DashboardActivity.class));
         finish();
+    }
+
+    private void decideProgressVisibility(boolean flag){
+        if(flag){
+            progressBar.setVisibility(View.VISIBLE);
+            lineView.setVisibility(View.INVISIBLE);
+        }
+        else {
+            progressBar.setVisibility(View.INVISIBLE);
+            lineView.setVisibility(View.VISIBLE);
+        }
     }
 
 
