@@ -86,8 +86,8 @@ public class SignupActivity extends AppCompatActivity {
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(SignupActivity.this, "Signup failed",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "Signup failed: "+task.getException().getLocalizedMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -95,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(SignupActivity.this, "Signup failed: "+e.getLocalizedMessage(),
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_LONG).show();
                     }
                 });
     }

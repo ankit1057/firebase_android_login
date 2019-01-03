@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         mForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(MainActivity.this, ForgotPassword.class));
             }
         });
     }
@@ -149,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
                                 startDashboardActivity();
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(MainActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Authentication failed: "+task.getException().getLocalizedMessage(),
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this,"Sign in failed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,"Sign in failed:"+task.getException().getLocalizedMessage(),Toast.LENGTH_LONG).show();
                         }
 
 
@@ -264,8 +264,8 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Authentication failed:"+task.getException().getLocalizedMessage(),
+                                    Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -313,8 +313,8 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed with tweeter.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Authentication failed:"+task.getException().getLocalizedMessage(),
+                                    Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
-                Toast.makeText(MainActivity.this,"Sign in failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Sign in failed:"+e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
             }
             return;
         }
