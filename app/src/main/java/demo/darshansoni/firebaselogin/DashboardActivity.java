@@ -53,8 +53,6 @@ public class DashboardActivity extends AppCompatActivity {
             else {
                 mDisplayName.setText(currentUser.getEmail());
             }
-
-
         }
         else {
             startActivity(new Intent(DashboardActivity.this, MainActivity.class));
