@@ -35,6 +35,8 @@ public class DashboardActivity extends AppCompatActivity {
                 decideAction(mAuth.getCurrentUser());
             }
         });
+
+
     }
 
     @Override
@@ -48,10 +50,10 @@ public class DashboardActivity extends AppCompatActivity {
     private void decideAction(FirebaseUser currentUser){
         if(currentUser!=null){
             if(currentUser.getDisplayName() != null){
-                mDisplayName.setText(currentUser.getDisplayName());
+                mDisplayName.setText(mDisplayName.getText().toString()+currentUser.getDisplayName());
             }
             else {
-                mDisplayName.setText(currentUser.getEmail());
+                mDisplayName.setText(mDisplayName.getText().toString()+currentUser.getEmail());
             }
         }
         else {
