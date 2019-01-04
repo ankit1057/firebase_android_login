@@ -35,8 +35,6 @@ public class DashboardActivity extends AppCompatActivity {
                 decideAction(mAuth.getCurrentUser());
             }
         });
-
-
     }
 
     @Override
@@ -44,7 +42,6 @@ public class DashboardActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         decideAction(currentUser);
-
     }
 
     private void decideAction(FirebaseUser currentUser){

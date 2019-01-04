@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-
     }
 
     private void initUi() {
@@ -180,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
         mForgotPassword = findViewById(R.id.forgot_password);
     }
 
-    /* methods for handling login with google */
 
+    /* methods for handling login with google */
     private void googleSignIn() {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -212,11 +211,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
     /* methods for handling login with google end */
 
-    /* methods for handling login with facebook */
 
+    /* methods for handling login with facebook */
     public void fbLogin(View view)
     {
         callbackManager = CallbackManager.Factory.create();
@@ -273,8 +271,8 @@ public class MainActivity extends AppCompatActivity {
     }
     /* methods for handling login with facebook end*/
 
-    /* methods for handling login with twitter */
 
+    /* methods for handling login with twitter */
     private void tweeterLogin(){
         mTwitterAuthClient = new TwitterAuthClient();
         mTwitterAuthClient.authorize(MainActivity.this, new Callback<TwitterSession>() {
@@ -322,6 +320,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* methods for handling login with twitter end*/
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
